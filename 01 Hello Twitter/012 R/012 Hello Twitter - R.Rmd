@@ -1,0 +1,23 @@
+---
+title: "012 Hello Twitter - R"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## 1. Getting started
+
+```{r Package management, message=FALSE, warning=FALSE, paged.print=FALSE}
+# creating a vector which includes all packages relevant for this script
+packages_012_Hello_Twitter_R      <- c("tidyverse",  # as standard packages to call dplyr, ggplot2, ggthemes as one
+                                       "ggthemes",   # personal preference; adds further optional themes to ggplot2
+                                       "rtweet",     # packages used to access the twitter API
+                                       "httpuv")    # 
+
+# unlike installing/loading the packages seperately, the following lapply function from base R passes the fector to the install.packages and library function within two lines.
+#lapply(packages_012_Hello_Twitter_R  , install.packages)                # install.packages()
+lapply(packages_012_Hello_Twitter_R  , library, character.only = TRUE)   # library()
+```
+
