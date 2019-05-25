@@ -19,3 +19,7 @@ Going through the process, the final
 
 ---
 Given the [Twitter Developer Terms](https://developer.twitter.com/en/developer-terms/more-on-restricted-use-cases#), the repository does not include the any dataset retrieved using its API. However, to enable reproducabilty following extisting third party twitter datasets were used. 
+
+- [Twitter Friends Dataset by Hubert Wassner](https://www.kaggle.com/hwassner/TwitterFriends) [Kaggle]
+- [Customer Service Data by Thought Vector](https://www.kaggle.com/thoughtvector/customer-support-on-twitter) [Kaggle]
+- [Twitter data: Pakistan elections 2018 by Muhammad Azfar Faizan](https://www.kaggle.com/mohdazfar/pakistan-elections-2018) [Kaggle]
