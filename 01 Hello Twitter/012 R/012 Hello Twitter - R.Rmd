@@ -9,15 +9,79 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ## 1. Getting started
 
-```{r Package management, message=FALSE, warning=FALSE, paged.print=FALSE}
+To get started, the first section will provide a first walthrough on how to  configure the API access details as well load the required packages. If any comment are unclear, feel free to message me either on github directly or twitter under @[LuyindaNjaza](https://twitter.com/LuyindaNjaza).
+
+### 1.1 Calling the relevant R packages
+```{r Package management, message=FALSE, warning=FALSE, results='hide'}
 # creating a vector which includes all packages relevant for this script
 packages_012_Hello_Twitter_R      <- c("tidyverse",  # as standard packages to call dplyr, ggplot2, ggthemes as one
                                        "ggthemes",   # personal preference; adds further optional themes to ggplot2
                                        "rtweet",     # packages used to access the twitter API
-                                       "httpuv")    # 
+                                       "httpuv",
+                                       "tmap",       # mapping
+                                       "sf")         # mapping
 
 # unlike installing/loading the packages seperately, the following lapply function from base R passes the fector to the install.packages and library function within two lines.
 #lapply(packages_012_Hello_Twitter_R  , install.packages)                # install.packages()
 lapply(packages_012_Hello_Twitter_R  , library, character.only = TRUE)   # library()
+```
+
+### 1.1 Configuring the personal twitter API access
+
+To configure the personal twitter API the following chunk provides two solution. While the first, the in script solution, is the most comvenient one if you just want to take a first look on the twitter data available, the second, the external solution, provides a neat solution if you are working on a bigger project and are goinng to use your twitter credentials in multiple notebooks.
+
+```{r Twitter Authentication}
+# In script solution:
+
+tw_token <- create_token(
+  app = "YOUR_APP",
+  consumer_key = "YOUR_CONSUMER_KEY",
+  consumer_secret = "YOUR_CONSUMER_SECRET",
+  access_token = "YOUR_ACCESS_TOKEN",
+  access_secret = "YOUR_ACCESS_SECRET")
+
+# External solution:
+source("Twitter_credentials.R")
+```
+
+## 2. Hello Twitter
+
+To investigating the latest tweets  (search_tweet includes tweets of the last 6-9 days) discussing potentially popular data science relevant hashtags or user in context within of Uganda, Africa and the World, the following lines define the  terms of interest and can be extended or altered depending on the individual area of interest.
+
+```{r Terms of interest}
+# this list is by no means extensive
+terms_of_interest <-    c("SatRdaykla","rstat", "kampalR","satRdays_org",
+                           "AfricaRUsers", "ZindiAfrica", "DataScienceNIG",
+                           "dsa_org", "Rladieskampala", "DakaRUsers",
+                           "satRday_ZAF", "RLadiesAddis", "RLadiesCapeTown",
+                           "RLadiesRabat", "CapeRuser")
+```
+
+```{r Getting the tweets of interest}
+# Search for the tweets and retweets including our terms of interest
+# First overview of the rtweet package
+?rtweet
+
+SatRdayKla.toi<- search_tweets2( q = terms_of_interest,      # query to look up the predefined terms 
+                                 n = 50000,                  # setting the limit of possible results to 50.000 tweets and retweets. Using the terms defined                                                                above, the results should not exceed this limit. By searching for bigger datasets > 50.000 I                                                                I would personaly use to either split the requests or run them from an rapserry pi or                                                                      adrunino as the script can run for days, hours or even weeks. 
+                                 include_rts = TRUE,         # include retweets to see were and who participates digitally in the SatrdayKla event
+                                 retryonratelimit = TRUE,    # as the set treshold exceeds the current twitter timeout limit of 18.000 tweets per query and                                                                15 min, the retryonratelimit incorporates this limitations and enables to continue the                                                                     request after the limit is reached.
+                                 token = tw_token)           # Calls the twitter authentication defined before. At the moment not necessary.
+
+# Add geo information long/lat
+SatRdayKla.toi.geo <- SatRdayKla.toi %>%                     # I use pipes as often as possible as they streamline my workflow considerably. In case of any                                                                questions see https://r4ds.had.co.nz/pipes.html
+                           lat_lng()                         # function of the rtweets package to convert the bbox_coords into conventional long/lat                                                                      geo-information
+
+# Taking a first look on our dataset
+View(SatRdayKla.toi.geo)
+
+# Clearing the enviroment
+ls()                                                        # In particular if you experimented with 
+rm(list = setdiff(ls(),
+                   c("SatRdayKla.toi.geo", 
+                     "terms_of_interest",
+                     "packages_012_Hello_Twitter_R")
+                   )
+ )
 ```
 

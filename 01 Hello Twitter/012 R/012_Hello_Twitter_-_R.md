@@ -3,6 +3,14 @@
 
 ## 1\. Getting started
 
+To get started, the first section will provide a first walthrough on how
+to configure the API access details as well load the required packages.
+If any comment are unclear, feel free to message me either on github
+directly or twitter under
+@[LuyindaNjaza](https://twitter.com/LuyindaNjaza).
+
+### 1.1 Calling the relevant R packages
+
 ``` r
 # creating a vector which includes all packages relevant for this script
 packages_012_Hello_Twitter_R      <- c("tidyverse",  # as standard packages to call dplyr, ggplot2, ggthemes as one
@@ -15,26 +23,18 @@ packages_012_Hello_Twitter_R      <- c("tidyverse",  # as standard packages to c
 lapply(packages_012_Hello_Twitter_R  , library, character.only = TRUE)   # library()
 ```
 
-    ## [[1]]
-    ##  [1] "forcats"   "stringr"   "dplyr"     "purrr"     "readr"    
-    ##  [6] "tidyr"     "tibble"    "ggplot2"   "tidyverse" "stats"    
-    ## [11] "graphics"  "grDevices" "utils"     "datasets"  "methods"  
-    ## [16] "base"     
-    ## 
-    ## [[2]]
-    ##  [1] "ggthemes"  "forcats"   "stringr"   "dplyr"     "purrr"    
-    ##  [6] "readr"     "tidyr"     "tibble"    "ggplot2"   "tidyverse"
-    ## [11] "stats"     "graphics"  "grDevices" "utils"     "datasets" 
-    ## [16] "methods"   "base"     
-    ## 
-    ## [[3]]
-    ##  [1] "rtweet"    "ggthemes"  "forcats"   "stringr"   "dplyr"    
-    ##  [6] "purrr"     "readr"     "tidyr"     "tibble"    "ggplot2"  
-    ## [11] "tidyverse" "stats"     "graphics"  "grDevices" "utils"    
-    ## [16] "datasets"  "methods"   "base"     
-    ## 
-    ## [[4]]
-    ##  [1] "httpuv"    "rtweet"    "ggthemes"  "forcats"   "stringr"  
-    ##  [6] "dplyr"     "purrr"     "readr"     "tidyr"     "tibble"   
-    ## [11] "ggplot2"   "tidyverse" "stats"     "graphics"  "grDevices"
-    ## [16] "utils"     "datasets"  "methods"   "base"
+### 1.1 Configuring the personal twitter API access
+
+To configure the personal twitter API the following chunk provides two
+solution. While the first, the in script solution, is the most
+comvenient one if you just want to take a first look on the twitter data
+available, the second, the external solution, provides a neat solution
+if you are working on a bigger project and are goinng to use your
+twitter credentials in multiple notebooks.
+
+``` r
+# In script solution:
+
+# External solution:
+source("Twitter_credentials.R", echo = TRUE , prompt.echo = "", spaced = F)
+```
