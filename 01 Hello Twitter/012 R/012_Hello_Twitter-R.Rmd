@@ -18,6 +18,7 @@ packages_012_Hello_Twitter_R      <- c("tidyverse",  # as standard packages to c
                                        "ggthemes",   # personal preference; adds further optional themes to ggplot2
                                        "rtweet",     # packages used to access the twitter API
                                        "httpuv",
+                                       "rmarkdown",
                                        "tmap")       # mapping
 
 # unlike installing/loading the packages seperately, the following lapply function from base R passes the fector to the install.packages and library function within two lines.
@@ -63,19 +64,22 @@ After defining our terms of interest, the following lines use the 'search_tweets
 ```{r Getting the tweets of interest}
 # Search for the tweets and retweets including our terms of interest
 # First overview of the rtweet package
-#?rtweet
+# ?rtweet                                                   # in case of any questions regarding the general package
 
 # Commented out to reduce the knit time
-#  SatRdayKla.toi<- search_tweets2( q = terms_of_interest,      # query to look up the predefined terms
-#                                  n = 50000,                  # setting the limit of possible results to 50.000 tweets and retweets. Using the terms                                                                       defined above, the results should not exceed this limit. By searching for bigger datasets >                                                                 50.000 I I would personaly use to either split the requests or run them from an rapserry pi                                                                 or adrunino as the script can run for days, hours or even weeks.
-#                                  include_rts = TRUE,         # include retweets to see were and who participates digitally in the SatrdayKla event
-#                                  retryonratelimit = TRUE#,    # as the set treshold exceeds the current twitter timeout limit of 18.000 tweets per query                                                                   and 15 min, the retryonratelimit incorporates this limitations and enables to continue the                                                                 request after the limit is reached.
-# #                                 token = tw_token            # Calls the twitter authentication defined before. At the moment not necessary.
-#                                )
-# If the dataset is already in stored 
-load("SatRdayKla.toi.RData")
+ SatRdayKla.toi<- search_tweets2( q = terms_of_interest,      # query to look up the predefined terms
+                                 n = 50000,                  # setting the limit of possible results to 50.000 tweets and retweets. Using the terms                                                                     defined above, the results should not exceed this limit. By searching for bigger datasets                                                                 > 50.000 I I would personaly use to either split the requests or run them from an rapserry                                                                pi or adrunino as the script can run for days, hours or even weeks.
+                                 include_rts = TRUE,         # include retweets to see were and who participates digitally in the SatrdayKla event
+                                 retryonratelimit = TRUE#,    # as the set treshold exceeds the current twitter timeout limit of 18.000 tweets per query                                                                  and 15 min, the retryonratelimit incorporates this limitations and enables to continue the                                                                 request after the limit is reached.
+#                                 token = tw_token            # Calls the twitter authentication defined before. At the moment not necessary.
+                                )
+
 # Store dataset
 save(SatRdayKla.toi, file = "SatRdayKla.toi.RData")
+
+# If the dataset is already in stored
+load("SatRdayKla.toi.RData")
+
 
  # Add geo information long/lat
  SatRdayKla.toi.geo <- SatRdayKla.toi %>%                     # I use pipes as often as possible as they streamline my workflow considerably. In case of                                                                   any questions see https://r4ds.had.co.nz/pipes.html
