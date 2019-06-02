@@ -64,7 +64,7 @@ After defining our terms of interest, the following lines use the 'search_tweets
 ```{r Getting the tweets of interest}
 # Search for the tweets and retweets including our terms of interest
 # First overview of the rtweet package
-?rtweet
+#?rtweet
 
 # Commented out to reduce the knit time
 #  SatRdayKla.toi<- search_tweets2( q = terms_of_interest,      # query to look up the predefined terms
