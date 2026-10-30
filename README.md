@@ -22,12 +22,12 @@ Following the described process the you can find your individual keys and token 
 
 **Consumer API keys**
 
-API key:            SVZmwiE7YGPZbyRMPKqOnSwmT
-API secret key:     FIMx9bBXQndbdkqnieNxFRpR69UO5voFl6O90eXofmHJleMxQo
+API key:           
+API secret key:     
 
 Access token & access token secret
-Access token:         1127108342495813632-0TE2IpM5vnapYlcxt4oCn1vbq4uCpj
-Access token secret:  970I6IhozhMMf2fLY9qlxVvndqsCeoOYkhv9wmCjpZf96
+Access token:        
+Access token secret:  
 
 ---
 Given the [Twitter Developer Terms](https://developer.twitter.com/en/developer-terms/more-on-restricted-use-cases#), the repository does not include the any dataset retrieved using its API. However, to enable reproducabilty following extisting third party twitter datasets were used.
